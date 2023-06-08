@@ -4,6 +4,8 @@
 #include <iterator>
 #include <vector>
 #include <set>
+#include <math.h>
+#include <algorithm>
 
 
 using namespace std;

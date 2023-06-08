@@ -1,5 +1,4 @@
 #include "MagicalContainer.hpp"
-#include <math.h>
 
 namespace ariel {
     
@@ -21,23 +20,10 @@ namespace ariel {
     void MagicalContainer::addElement(int element)
     {
         originalElement.push_back(element);
-        sortedElement.insert(element);
-        if(isPrime(element))
-            primeElement.push_back(element);
-        
-        crossElement.clear();
-        auto begin = originalElement.begin();
-        auto end = --originalElement.end();
-        while (begin != end)
-        {
-            crossElement.push_back(*begin);
-            crossElement.push_back(*end);
-            ++begin;
-            --end;
-        }
-        if(begin == end)
-            crossElement.push_back(*begin);
-        
+        originalElementSort();
+        sortedFix();
+        primeFix();
+        crossFix();
     }
 
     void MagicalContainer::removeElement(int element) 
@@ -55,24 +41,67 @@ namespace ariel {
         if(!inList)
             throw runtime_error("You can't remove element that not in the list.");
         
-        originalElement.remove(element);
-        auto begin = originalElement.begin();
-        auto end = --originalElement.end();
-        while (begin != end)
-        {
-            crossElement.push_back(*begin);
-            crossElement.push_back(*end);
-            ++begin;
-            --end;
-        }
-        if(begin == end)
-            crossElement.push_back(*begin);
-
+        originalElement.erase(remove(originalElement.begin(), originalElement.end(), element),originalElement.end());
+        sortedFix();
+        primeFix();
+        crossFix();
     }
 
     int MagicalContainer::size()
     {
         return originalElement.size();
+    }
+
+    void MagicalContainer::crossFix()
+    {
+        crossElement.clear();
+        auto begin = originalElement.begin();
+        auto end = --originalElement.end();
+
+        while (begin < end)
+        {
+            crossElement.push_back(&(*begin));
+            crossElement.push_back(&(*end));
+            begin++;
+            end--;
+        }
+        if(begin == end)
+            crossElement.push_back(&(*begin));
+    }
+
+    void MagicalContainer::primeFix()
+    {
+        primeElement.clear();
+        for(auto itr = originalElement.begin(); itr != originalElement.end(); ++itr)
+        {
+            if(isPrime(*itr))
+                primeElement.push_back(&(*itr));
+        }
+    }
+
+    void MagicalContainer::sortedFix()
+    {
+        sortedElement.clear();
+        for(auto itr = originalElement.begin(); itr != originalElement.end(); ++itr)
+        {
+            sortedElement.push_back(&(*itr));
+        }
+    }
+
+    void MagicalContainer::originalElementSort()
+    {
+        for(unsigned long i = 0; i < originalElement.size(); ++i)
+        {
+            for(unsigned long j = 0; j < originalElement.size() - i -1; j++)
+            {
+                if(originalElement[j] > originalElement [j+1])
+                {
+                    int tmp = originalElement[j];
+                    originalElement[j] = originalElement[j+1];
+                    originalElement[j+1] = tmp;
+                }
+            }
+        }
     }
 
     // AscendingIterator implementation
@@ -121,7 +150,7 @@ namespace ariel {
         if (iter == container.sortedElement.end()) 
             throw std::out_of_range("Iterator out of range");
     
-        return *iter;
+        return **iter;
     }
 
     bool MagicalContainer::AscendingIterator::operator==(const AscendingIterator& other) const 
@@ -198,7 +227,7 @@ namespace ariel {
         if (iter == container.crossElement.end()) 
             throw std::out_of_range("Iterator out of range");
     
-        return *iter;
+        return **iter;
     }
 
     bool MagicalContainer::SideCrossIterator::operator==(const SideCrossIterator& other) const 
@@ -276,7 +305,7 @@ namespace ariel {
         if (iter == container.crossElement.end()) 
             throw std::out_of_range("Iterator out of range");
     
-        return *iter;
+        return **iter;
     }
 
     bool MagicalContainer::PrimeIterator::operator==(const PrimeIterator& other) const 
