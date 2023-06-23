@@ -8,7 +8,6 @@
 #include <algorithm>
 
 
-using namespace std;
 
 namespace ariel {
     bool isPrime(int elem);
@@ -29,10 +28,10 @@ namespace ariel {
 
 
     private:
-        vector<int> originalElement;
-        vector<int*> sortedElement;
-        vector<int*> crossElement;
-        vector<int*> primeElement;
+        std::vector<int> originalElement;
+        std::vector<int*> sortedElement;
+        std::vector<int*> crossElement;
+        std::vector<int*> primeElement;
 
         friend class AscendingIterator;
         friend class SideCrossIterator;
@@ -64,7 +63,7 @@ namespace ariel {
     private:
         MagicalContainer& container;
         size_t index;
-        vector<int*>::iterator iter;
+        std::vector<int*>::iterator iter;
     };
 
     class MagicalContainer::SideCrossIterator {
@@ -90,7 +89,7 @@ namespace ariel {
 
     private:
         MagicalContainer& container;
-        vector<int*>::iterator iter;
+        std::vector<int*>::iterator iter;
         size_t index;
     };
 
@@ -117,7 +116,7 @@ namespace ariel {
 
     private:
         MagicalContainer& container;
-        vector<int*>::iterator iter;
+        std::vector<int*>::iterator iter;
         size_t index;
     };
 }

@@ -1,5 +1,6 @@
 #include "MagicalContainer.hpp"
 
+using namespace std;
 namespace ariel {
     
     bool isPrime(int elem) 

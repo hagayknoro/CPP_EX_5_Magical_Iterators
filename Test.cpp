@@ -1,5 +1,5 @@
 #include "doctest.h"
-#include "MagicalContainer.hpp"
+#include "sources/MagicalContainer.hpp"
 
 using namespace ariel;
 
@@ -73,12 +73,23 @@ TEST_CASE("Testing MagicalContainer") {
         container.addElement(5);
         container.addElement(10);
         container.addElement(3);
+        container.addElement(15);
+        container.addElement(1);
 
 
-        MagicalContainer::AscendingIterator iter_container(container);
-        MagicalContainer::AscendingIterator it = iter_container.begin();
-        MagicalContainer::AscendingIterator end = iter_container.end();
 
+        MagicalContainer::SideCrossIterator iter_container(container);
+        MagicalContainer::SideCrossIterator it = iter_container.begin();
+        MagicalContainer::SideCrossIterator end = iter_container.end();
+
+        CHECK(*it == 1);
+        CHECK(it != end);
+
+        ++it;
+        CHECK(*it == 15);
+        CHECK(it != end);
+
+        ++it;
         CHECK(*it == 3);
         CHECK(it != end);
 
@@ -100,9 +111,9 @@ TEST_CASE("Testing MagicalContainer") {
         container.addElement(3);
 
 
-        MagicalContainer::AscendingIterator iter_container(container);
-        MagicalContainer::AscendingIterator it = iter_container.begin();
-        MagicalContainer::AscendingIterator end = iter_container.end();
+        MagicalContainer::PrimeIterator iter_container(container);
+        MagicalContainer::PrimeIterator it = iter_container.begin();
+        MagicalContainer::PrimeIterator end = iter_container.end();
 
         CHECK(*it == 3);
         CHECK(it != end);
