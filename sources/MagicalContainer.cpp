@@ -102,12 +102,12 @@ namespace ariel {
 
     // Constructor for AscendingIterator
     MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer& container)
-        : container(container), iter(container.sortedElement.begin()), index(0)
+        : container(container), iter(container.sortedElement.begin())
     {}
 
     // Copy constructor for AscendingIterator
     MagicalContainer::AscendingIterator::AscendingIterator(const AscendingIterator& other)
-        : container(other.container), iter(other.iter), index(other.index)
+        : container(other.container), iter(other.iter)
     {}
 
     // Assignment operator for AscendingIterator
@@ -115,21 +115,18 @@ namespace ariel {
         if (&container != &other.container)
             throw runtime_error("You can't assign iterators from different containers.");
         iter = other.iter;
-        index = other.index;
         return *this;
     }
 
     // Set the iterator to the beginning
     MagicalContainer::AscendingIterator& MagicalContainer::AscendingIterator::begin() {
         iter = container.sortedElement.begin();
-        index = 0;
         return *this;
     }
 
     // Set the iterator to the end
     MagicalContainer::AscendingIterator& MagicalContainer::AscendingIterator::end() {
         iter = container.sortedElement.end();
-        index = container.sortedElement.size();
         return *this;
     }
 
@@ -138,7 +135,6 @@ namespace ariel {
         if (iter == container.sortedElement.end())
             throw runtime_error("Iterator out of range");
         ++iter;
-        ++index;
         return *this;
     }
 
@@ -154,7 +150,7 @@ namespace ariel {
     bool MagicalContainer::AscendingIterator::operator==(const AscendingIterator& other) const {
         if (&container != &other.container)
             throw invalid_argument("You can't compare iterators from different containers.");
-        return index == other.index;
+        return iter == other.iter;
     }
 
     // Compare two AscendingIterators for inequality
@@ -167,7 +163,7 @@ namespace ariel {
         if (&container != &other.container) {
             throw invalid_argument("You can't compare iterators from different containers.");
         }
-        return index > other.index;
+        return iter > other.iter;
     }
 
     // Compare two AscendingIterators for less than
@@ -175,32 +171,30 @@ namespace ariel {
         if (&container != &other.container) {
             throw invalid_argument("You can't compare iterators from different containers.");
         }
-        return index < other.index;
+        return iter < other.iter;
     }
 
     // SideCrossIterator implementation
 
     // Constructor for SideCrossIterator
     MagicalContainer::SideCrossIterator::SideCrossIterator(MagicalContainer& container)
-        : container(container), iter(container.crossElement.begin()), index(0)
+        : container(container), iter(container.crossElement.begin())
     {}
 
     // Copy constructor for SideCrossIterator
     MagicalContainer::SideCrossIterator::SideCrossIterator(const SideCrossIterator& other)
-        : container(other.container), iter(other.iter), index(other.index)
+        : container(other.container), iter(other.iter)
     {}
 
     // Set the iterator to the beginning
     MagicalContainer::SideCrossIterator& MagicalContainer::SideCrossIterator::begin() {
         iter = container.crossElement.begin();
-        index = 0;
         return *this;
     }
 
     // Set the iterator to the end
     MagicalContainer::SideCrossIterator& MagicalContainer::SideCrossIterator::end() {
         iter = container.crossElement.end();
-        index = container.crossElement.size();
         return *this;
     }
 
@@ -209,7 +203,6 @@ namespace ariel {
         if (&container != &other.container)
             throw runtime_error("You can't assign iterators from different containers.");
         iter = other.iter;
-        index = other.index;
         return *this;
     }
 
@@ -218,7 +211,6 @@ namespace ariel {
         if (iter == container.crossElement.end())
             throw runtime_error("Iterator out of range");
         ++iter;
-        ++index;
         return *this;
     }
 
@@ -234,7 +226,7 @@ namespace ariel {
     bool MagicalContainer::SideCrossIterator::operator==(const SideCrossIterator& other) const {
         if (&container != &other.container)
             throw invalid_argument("You can't compare iterators from different containers.");
-        return index == other.index;
+        return iter == other.iter;
     }
 
     // Compare two SideCrossIterators for inequality
@@ -247,7 +239,7 @@ namespace ariel {
         if (&container != &other.container) {
             throw invalid_argument("You can't compare iterators from different containers.");
         }
-        return index > other.index;
+        return iter > other.iter;
     }
 
     // Compare two SideCrossIterators for less than
@@ -255,19 +247,19 @@ namespace ariel {
         if (&container != &other.container) {
             throw invalid_argument("You can't compare iterators from different containers.");
         }
-        return index < other.index;
+        return iter < other.iter;
     }
 
     // PrimeIterator implementation
 
     // Constructor for PrimeIterator
     MagicalContainer::PrimeIterator::PrimeIterator(MagicalContainer& container)
-        : container(container), iter(container.primeElement.begin()), index(0)
+        : container(container), iter(container.primeElement.begin())
     {}
 
     // Copy constructor for PrimeIterator
     MagicalContainer::PrimeIterator::PrimeIterator(const PrimeIterator& other)
-        : container(other.container), iter(other.iter), index(other.index)
+        : container(other.container), iter(other.iter)
     {}
 
     // Assignment operator for PrimeIterator
@@ -275,21 +267,18 @@ namespace ariel {
         if (&container != &other.container)
             throw runtime_error("You can't assign iterators from different containers.");
         iter = other.iter;
-        index = other.index;
         return *this;
     }
 
     // Set the iterator to the beginning
     MagicalContainer::PrimeIterator& MagicalContainer::PrimeIterator::begin() {
         iter = container.primeElement.begin();
-        index = 0;
         return *this;
     }
 
     // Set the iterator to the end
     MagicalContainer::PrimeIterator& MagicalContainer::PrimeIterator::end() {
         iter = container.primeElement.end();
-        index = container.primeElement.size();
         return *this;
     }
 
@@ -298,7 +287,6 @@ namespace ariel {
         if (iter == container.primeElement.end())
             throw runtime_error("Iterator out of range");
         ++iter;
-        ++index;
         return *this;
     }
 
@@ -314,7 +302,7 @@ namespace ariel {
     bool MagicalContainer::PrimeIterator::operator==(const PrimeIterator& other) const {
         if (&container != &other.container)
             throw invalid_argument("You can't compare iterators from different containers.");
-        return index == other.index;
+        return iter == other.iter;
     }
 
     // Compare two PrimeIterators for inequality
@@ -327,7 +315,7 @@ namespace ariel {
         if (&container != &other.container) {
             throw invalid_argument("You can't compare iterators from different containers.");
         }
-        return index > other.index;
+        return iter > other.iter;
     }
 
     // Compare two PrimeIterators for less than
@@ -335,6 +323,6 @@ namespace ariel {
         if (&container != &other.container) {
             throw invalid_argument("You can't compare iterators from different containers.");
         }
-        return index < other.index;
+        return iter < other.iter;
     }
 }

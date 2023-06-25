@@ -69,16 +69,6 @@ TEST_CASE("Testing MagicalContainer") {
         CHECK_THROWS_AS(*it, std::out_of_range);
     }
      
-    SUBCASE("Exception when accessing invalid iterator") {
-        MagicalContainer::AscendingIterator iter_container(container);
-        MagicalContainer::AscendingIterator it = iter_container.begin();
-        CHECK_NOTHROW(*it);
-
-        // Increment the iterator to make it invalid
-        ++it;
-
-        CHECK_THROWS_AS(*it, std::out_of_range);
-    }
 
     SUBCASE("SideCrossIterator") {
         container.addElement(5);

@@ -62,7 +62,6 @@ namespace ariel {
 
     private:
         MagicalContainer& container;
-        size_t index;
         std::vector<int*>::iterator iter;
     };
 
@@ -90,7 +89,6 @@ namespace ariel {
     private:
         MagicalContainer& container;
         std::vector<int*>::iterator iter;
-        size_t index;
     };
 
     class MagicalContainer::PrimeIterator {
@@ -117,7 +115,6 @@ namespace ariel {
     private:
         MagicalContainer& container;
         std::vector<int*>::iterator iter;
-        size_t index;
     };
 }
 
